@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h> // malloc, free 함수 사용을 위해 필요
+
+int main(void) {
+    char *addresses[4] = {
+        "Korea\nSeoul\nМаро\n152번지 2/3",
+        "Korea\nSeoul\nJongno\n152번지 2/3"
+    };
+
+    // 주소 배열 출력
+    for (int i = 0; i < 2; i++) {
+        printf("Address %d:\n%s\n\n", i + 1, addresses[i]);
+    }
+
+    // GitHub에 업로드하기 위해 파일로 저장
+    FILE *fp = fopen("addresses.txt", "w");
+    if (fp == NULL) {
+        printf("Failed to open file for writing.\n");
+        return 1;
+    }
+
+    // 주소를 파일에 저장
+    for (int i = 0; i < 2; i++) {
+        fprintf(fp, "Address %d:\n%s\n\n", i + 1, addresses[i]);
+    }
+
+    fclose(fp);
+    printf("Addresses saved to addresses.txt\n");
+
+    return 0;
+}
