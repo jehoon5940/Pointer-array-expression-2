@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+// 하노이 탑을 옮기는 함수 정의
+void hanoi(int n, char from, char to, char aux) {
+    // 종료 조건: 원반이 하나일 때
+    if (n == 1) {
+        printf("%c에서 원반 1를(을) %c로 옮김\n", from, to);
+        return;
+    }
+
+    // 재귀 호출을 통해 원반을 옮기는 과정을 출력
+    hanoi(n - 1, from, aux, to);
+    printf("%c에서 원반 %d를(을) %c로 옮김\n", from, n, to);
+    hanoi(n - 1, aux, to, from);
+}
+
+int main() {
+    int num_disks;
+    printf("하노이 탑의 원반이 몇 개인가요? ");
+    scanf("%d", &num_disks);
+
+    // 하노이 탑을 옮기는 함수 호출
+    hanoi(num_disks, 'A', 'C', 'B');
+
+    return 0;
+}
