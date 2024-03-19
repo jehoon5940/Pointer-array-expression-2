@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h> // malloc, free 함수 사용을 위해 필요
+
+int main(void) {
+    // 학생 정보를 저장할 배열 선언
+    const int num_students = 2;
+    const int max_length = 50;
+
+    char **names = (char **)malloc(num_students * sizeof(char *));
+    char **departments = (char **)malloc(num_students * sizeof(char *));
+    int *student_ids = (int *)malloc(num_students * sizeof(int));
+
+    // 메모리 할당 체크
+    if (names == NULL || departments == NULL || student_ids == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
+
+    // 학생 정보 입력 받기
+    for (int i = 0; i < num_students; i++) {
+        names[i] = (char *)malloc(max_length * sizeof(char));
+        departments[i] = (char *)malloc(max_length * sizeof(char));
+
+        printf("학생 %d의 이름: ", i + 1);
+        scanf(" %[^\n]", names[i]);
+        printf("학생 %d의 학과: ", i + 1);
+        scanf(" %[^\n]", departments[i]);
+        printf("학생 %d의 학번: ", i + 1);
+        scanf("%d", &student_ids[i]);
+        getchar(); // 입력 버퍼 비우기
+    }
+
+    // 학생 정보 출력
+    for (int i = 0; i < num_students; i++) {
+        printf("학생 %d\n", i + 1);
+        printf("%s\n", names[i]);
+        printf("%s\n", departments[i]);
+        printf("%d\n", student_ids[i]);
+    }
+
+    // 메모리 해제
+    for (int i = 0; i < num_students; i++) {
+        free(names[i]);
+        free(departments[i]);
+    }
+    free(names);
+    free(departments);
+    free(student_ids);
+
+    return 0;
+}
